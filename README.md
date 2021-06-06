@@ -52,7 +52,7 @@ Outros: Perde 30% do valor investido
 
 Projeto da solução:
 
-Desenvolvido em camadas, seguindo a Onion Architecture e TDD. Descrição:
+Desenvolvido em camadas, seguindo o padrão SOLID, Onion Architecture e TDD. Descrição:
 
 1 Criação do repositório 'InvestmentRepository' responsável pelo leitura dos endpoints externos e mapeamento para os 'CustomResponse';
 
@@ -66,6 +66,4 @@ Desenvolvido em camadas, seguindo a Onion Architecture e TDD. Descrição:
 
 6 Implementação de Testes Unitários por camadas;
 
-7 Configuração de auto mapper e injeção de dependência; 
-
-8 Utilização do padrão SOLID.
+7 Configuração de AutoMapper e injeção de dependências.
