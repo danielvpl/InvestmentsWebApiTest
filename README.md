@@ -52,11 +52,18 @@ Outros: Perde 30% do valor investido
 
 Projeto da solução:
 
-Desenvolvido em camadas, seguindo a Onion Architecture e TDD. 
+Desenvolvido em camadas, seguindo o padrão SOLID, Onion Architecture e TDD. Descrição:
 
-Criação do repositório 'InvestmentRepository' responsável pelo leitura dos endpoints externos e mapeamento para os 'CustomResponse'.
+1 Criação do repositório 'InvestmentRepository' responsável pelo leitura dos endpoints externos e mapeamento para os 'CustomResponse';
 
-Criação dos serviços: InvestmentTdsService, InvestmentLcisService, InvestmentFundsService.
+2 Criação dos serviços: InvestmentTdsService, InvestmentLcisService, InvestmentFundsService;
 
-Criação do app service: InvestmentApp para consolidar o resultado da execução dos serviços e retornar para o mapeamento 'ClientInvestments'.
+3 Criação do app service: InvestmentApp para consolidar o resultado da execução dos serviços e retornar para o mapeamento 'ClientInvestments';
 
+4 Criação do controller 'Investimento', utilizando cache para otimizar o desempenho na exibição de resultados;
+
+5 Criação da documentação da API via swagger;
+
+6 Implementação de Testes Unitários por camadas;
+
+7 Configuração de AutoMapper e injeção de dependências.
