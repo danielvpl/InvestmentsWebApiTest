@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Data", "3 - Data", "{36
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8088D343-8AAE-40D5-809B-9787E4447D38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{20B075A2-496A-461C-9B63-C91375255353}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvestmentsWebapiTest", "Presentation\InvestmentsWebapiTest.csproj", "{20B075A2-496A-461C-9B63-C91375255353}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{2A014F52-751B-4187-BA8C-F08BC554A87D}"
 EndProject
