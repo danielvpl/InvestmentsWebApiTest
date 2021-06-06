@@ -1,0 +1,16 @@
+/Domain.Tests/obj
+/Domain.Tests/bin
+/Domain/obj
+/Domain/bin
+/Data/obj
+/Data/bin
+/Application/bin
+/Application/obj
+/Tests/Presentation.UnitTests/bin
+/Tests/Presentation.UnitTests/obj
+/IoC/bin
+/IoC/obj
+/Presentation/bin
+/Tests/Domain.Tests/bin
+/Tests/Domain.Tests/obj
+/Presentation/obj
