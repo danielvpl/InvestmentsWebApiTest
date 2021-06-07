@@ -18,9 +18,9 @@ namespace Data.Repositories
             _configuration = configuration;            
         }
 
-        public async Task<List<TdsResponse>> GetTds()
+        public async Task<TdsResponse> GetTds()
         {
-            List<TdsResponse> lstInvestment = new List<TdsResponse>();
+            TdsResponse tdsResponse = new TdsResponse();
             try
             {
                 HttpClientHandler clientHandler = new HttpClientHandler();
@@ -35,7 +35,7 @@ namespace Data.Repositories
                     client.Dispose();
                     var result = await response.Content.ReadAsStringAsync();
                     
-                    return JSONHelper.AsObjectList<TdsResponse>(result).tds;
+                    return JSONHelper.AsObjectList<TdsResponse>(result);
                 }
             }
             catch (Exception ex)
@@ -43,12 +43,12 @@ namespace Data.Repositories
                 throw new Exception(ex.Message);
             }
 
-            return lstInvestment;
+            return tdsResponse;
         }
 
-        public async Task<List<LciResponse>> GetLcis()
+        public async Task<LciResponse> GetLcis()
         {
-            List<LciResponse> lstInvestment = new List<LciResponse>();
+            LciResponse lstInvestment = new LciResponse();
             try
             {
                 HttpClientHandler clientHandler = new HttpClientHandler();
@@ -62,7 +62,7 @@ namespace Data.Repositories
                     //GET
                     client.Dispose();
                     var result = await response.Content.ReadAsStringAsync();
-                    return JSONHelper.AsObjectList<LciResponse>(result).lcis;
+                    return JSONHelper.AsObjectList<LciResponse>(result);
                 }
             }
             catch (Exception ex)
@@ -73,9 +73,10 @@ namespace Data.Repositories
             return lstInvestment;
         }
 
-        public async Task<List<FundsResponse>> GetFunds()
+        public async Task<FundsResponse> GetFunds()
         {
-            List<FundsResponse> lstInvestment = new List<FundsResponse>();
+            FundsResponse lstInvestment = new FundsResponse();
+
             try
             {
                 HttpClientHandler clientHandler = new HttpClientHandler();
@@ -89,7 +90,7 @@ namespace Data.Repositories
                     //GET
                     client.Dispose();
                     var result = await response.Content.ReadAsStringAsync();
-                    return JSONHelper.AsObjectList<FundsResponse>(result).fundos;
+                    return JSONHelper.AsObjectList<FundsResponse>(result);
                 }
             }
             catch (Exception ex)

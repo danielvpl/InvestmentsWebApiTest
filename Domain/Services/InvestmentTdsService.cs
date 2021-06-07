@@ -17,9 +17,9 @@ namespace Domain.Services
         public async Task<List<Investment>> CalculateInvestment(DateTime dtConsult)
         {            
             List<Investment> lstInvestments = new List<Investment>();
-            var lstTds = await _repository.GetTds();           
+            var tdsReponse = await _repository.GetTds();           
 
-            foreach (var item in lstTds)
+            foreach (var item in tdsReponse.tds)
             {
                 lstInvestments.Add(new Investment()
                 {

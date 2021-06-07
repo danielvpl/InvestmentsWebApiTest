@@ -13,23 +13,27 @@ namespace Domain.Tests
     {
         private InvestmentTdsService _service;
         private Mock<IInvestmentRepository> _repo;
-        private List<TdsResponse> _lstTds;
+        private List<InvestmentTds> _lstTds;
+        private TdsResponse _tdsResponse;
 
         public InvestmentTdsServiceCalculateInvestment()
         {
             _repo = new Mock<IInvestmentRepository>();
             _service = new InvestmentTdsService(_repo.Object);
-            _lstTds = new List<TdsResponse>()
+            _tdsResponse = new TdsResponse()
             {
-                new TdsResponse(){
-                    ValorInvestido = 799.4720,
-                    ValorTotal = 829.69,
-                    Vencimento = DateTime.Parse("2025-03-01T00:00:00"),
-                    DataDeCompra = DateTime.Parse("2015-03-01T00:00:00"),
-                    Iof = 0,
-                    Indice = "SELIC",
-                    Tipo = "TD",
-                    Nome = "Tesouro Selic 2025"
+                tds = new List<InvestmentTds>()
+                {
+                    new InvestmentTds(){
+                        ValorInvestido = 799.4720,
+                        ValorTotal = 829.69,
+                        Vencimento = DateTime.Parse("2025-03-01T00:00:00"),
+                        DataDeCompra = DateTime.Parse("2015-03-01T00:00:00"),
+                        Iof = 0,
+                        Indice = "SELIC",
+                        Tipo = "TD",
+                        Nome = "Tesouro Selic 2025"
+                    }
                 }
             };
         }
@@ -39,7 +43,7 @@ namespace Domain.Tests
         {
             var dt = DateTime.Parse("06/06/2021");
 
-            _repo.Setup(x => x.GetTds()).ReturnsAsync(_lstTds);           
+            _repo.Setup(x => x.GetTds()).ReturnsAsync(_tdsResponse);           
 
             var result = await _service.CalculateInvestment(dt);
 

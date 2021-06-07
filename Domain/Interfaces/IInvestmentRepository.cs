@@ -8,8 +8,8 @@ namespace Domain.Interfaces
 {
     public interface IInvestmentRepository
     {
-        Task<List<TdsResponse>> GetTds();
-        Task<List<LciResponse>> GetLcis();
-        Task<List<FundsResponse>> GetFunds();              
+        Task<TdsResponse> GetTds();
+        Task<LciResponse> GetLcis();
+        Task<FundsResponse> GetFunds();              
     }
 }
