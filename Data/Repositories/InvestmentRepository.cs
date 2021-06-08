@@ -20,85 +20,17 @@ namespace Data.Repositories
 
         public async Task<TdsResponse> GetTds()
         {
-            TdsResponse tdsResponse = new TdsResponse();
-            try
-            {
-                HttpClientHandler clientHandler = new HttpClientHandler();
-                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-                var client = new HttpClient(clientHandler);
-                client.BaseAddress = new Uri(_configuration.GetSection("ApiUrlBase").Value); 
-                client.DefaultRequestHeaders.Accept.Clear();
-                HttpResponseMessage response = await client.GetAsync(_configuration.GetSection("GetTdsEndpoint").Value);
-                if (response.IsSuccessStatusCode)
-                {
-                    //GET
-                    client.Dispose();
-                    var result = await response.Content.ReadAsStringAsync();
-                    
-                    return JSONHelper.AsObjectList<TdsResponse>(result);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
-            return tdsResponse;
+            return await HttpRequestHelper<TdsResponse>.GetResult(_configuration.GetSection("ApiUrlBase").Value, _configuration.GetSection("GetTdsEndpoint").Value);            
         }
 
         public async Task<LciResponse> GetLcis()
         {
-            LciResponse lstInvestment = new LciResponse();
-            try
-            {
-                HttpClientHandler clientHandler = new HttpClientHandler();
-                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-                var client = new HttpClient(clientHandler);
-                client.BaseAddress = new Uri(_configuration.GetSection("ApiUrlBase").Value);
-                client.DefaultRequestHeaders.Accept.Clear();
-                HttpResponseMessage response = await client.GetAsync(_configuration.GetSection("GetLcisEndpoint").Value);
-                if (response.IsSuccessStatusCode)
-                {
-                    //GET
-                    client.Dispose();
-                    var result = await response.Content.ReadAsStringAsync();
-                    return JSONHelper.AsObjectList<LciResponse>(result);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
-            return lstInvestment;
+            return await HttpRequestHelper<LciResponse>.GetResult(_configuration.GetSection("ApiUrlBase").Value, _configuration.GetSection("GetTdsEndpoint").Value);
         }
 
         public async Task<FundsResponse> GetFunds()
         {
-            FundsResponse lstInvestment = new FundsResponse();
-
-            try
-            {
-                HttpClientHandler clientHandler = new HttpClientHandler();
-                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-                var client = new HttpClient(clientHandler);
-                client.BaseAddress = new Uri(_configuration.GetSection("ApiUrlBase").Value);
-                client.DefaultRequestHeaders.Accept.Clear(); 
-                HttpResponseMessage response = await client.GetAsync(_configuration.GetSection("GetFundsEndpoint").Value);
-                if (response.IsSuccessStatusCode)
-                {
-                    //GET
-                    client.Dispose();
-                    var result = await response.Content.ReadAsStringAsync();
-                    return JSONHelper.AsObjectList<FundsResponse>(result);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
-            return lstInvestment;
+            return await HttpRequestHelper<FundsResponse>.GetResult(_configuration.GetSection("ApiUrlBase").Value, _configuration.GetSection("GetTdsEndpoint").Value);
         }
     }
 }

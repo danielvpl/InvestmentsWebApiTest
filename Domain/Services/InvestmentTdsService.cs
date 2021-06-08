@@ -15,24 +15,34 @@ namespace Domain.Services
         }
 
         public async Task<List<Investment>> CalculateInvestment(DateTime dtConsult)
-        {            
-            List<Investment> lstInvestments = new List<Investment>();
-            var tdsReponse = await _repository.GetTds();           
-
-            foreach (var item in tdsReponse.tds)
+        {
+            try
             {
-                lstInvestments.Add(new Investment()
-                {
-                    Nome = item.Nome,
-                    Ir = (item.ValorTotal - item.ValorInvestido) * 0.10,
-                    ValorInvestido = item.ValorInvestido,
-                    ValorResgate = item.ValorTotal - item.ValorTotal * GetRedemptionTax(item.Vencimento, item.DataDeCompra, dtConsult),
-                    ValorTotal = item.ValorTotal,
-                    Vencimento = item.Vencimento
-                });
-            }
+                List<Investment> lstInvestments = new List<Investment>();
+                var tdsReponse = await _repository.GetTds();
 
-            return lstInvestments;
+                if (tdsReponse != null)
+                {
+                    foreach (var item in tdsReponse.tds)
+                    {
+                        lstInvestments.Add(new Investment()
+                        {
+                            Nome = item.Nome,
+                            Ir = (item.ValorTotal - item.ValorInvestido) * 0.10,
+                            ValorInvestido = item.ValorInvestido,
+                            ValorResgate = item.ValorTotal - item.ValorTotal * GetRedemptionTax(item.Vencimento, item.DataDeCompra, dtConsult),
+                            ValorTotal = item.ValorTotal,
+                            Vencimento = item.Vencimento
+                        });
+                    }
+                }
+
+                return lstInvestments;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }        
     }
 }

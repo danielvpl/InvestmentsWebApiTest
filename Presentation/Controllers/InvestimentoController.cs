@@ -2,6 +2,7 @@
 using Domain.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Nancy;
 using System;
 using System.Threading.Tasks;
 
@@ -22,19 +23,24 @@ namespace Presentation.Controllers
 
         // GET api/<InvestmentController>        
         [HttpGet]
-        public async Task<ClientInvestments> GetClientInvestments([FromQuery] DateTime dtConsult)
+        public async Task<IActionResult> GetClientInvestments([FromQuery] DateTime dtConsult)
         {
-            dtConsult = dtConsult.Year == 1 ? DateTime.Now : dtConsult;
-            
-            var cacheEntry = _cache.GetOrCreate("ResultCache"+dtConsult.ToShortDateString(), entry =>
+            try
             {
-                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24 - DateTime.Now.Hour);
-                entry.SetPriority(CacheItemPriority.High);
+                dtConsult = dtConsult.Year == 1 ? DateTime.Now : dtConsult;
 
-                return _app.GetClientInvestments(dtConsult);
-            });
+                var cacheEntry = _cache.GetOrCreate("ResultCache" + dtConsult.ToShortDateString(), async entry =>
+                  {
+                      entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24 - DateTime.Now.Hour);
+                      entry.SetPriority(CacheItemPriority.High);
+                      var result = await _app.GetClientInvestments(dtConsult);
+                      return Ok(result);                      
+                  });
 
-            return await cacheEntry;
+                return await cacheEntry;
+            }catch(Exception ex) {
+                return BadRequest("Erro ao acessar serviço. Detalhes: " + ex.Message);
+            };
         }                                      
     }
 }
