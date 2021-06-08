@@ -53,7 +53,7 @@ namespace InvestmentsWebapiTest
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "EmissoraAudiencia V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "InvestmentsWebapiTest V1");
             });
 
             app.UseHttpsRedirection();

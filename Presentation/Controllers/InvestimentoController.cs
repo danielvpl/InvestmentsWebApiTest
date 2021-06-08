@@ -23,7 +23,7 @@ namespace Presentation.Controllers
 
         // GET api/<InvestmentController>        
         [HttpGet]
-        public async Task<IActionResult> GetClientInvestments([FromQuery] DateTime dtConsult)
+        public async Task<ActionResult<ClientInvestments>> GetClientInvestments([FromQuery] DateTime dtConsult)
         {
             try
             {
