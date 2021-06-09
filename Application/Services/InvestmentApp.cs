@@ -4,7 +4,6 @@ using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Services;
 using Domain.ViewModels;
-using Nancy;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -32,9 +31,14 @@ namespace Application.Services
         {
             try
             {
-                List<Investment> investimentos = await _serviceTds.CalculateInvestment(dtConsult);
-                investimentos.AddRange(await _serviceLcis.CalculateInvestment(dtConsult));
-                investimentos.AddRange(await _serviceFunds.CalculateInvestment(dtConsult));
+                var resultTds = _serviceTds.CalculateInvestment(dtConsult);
+                var resultLcis = _serviceLcis.CalculateInvestment(dtConsult);
+                var resultFunds = _serviceFunds.CalculateInvestment(dtConsult);
+
+                List<Investment> investimentos = new List<Investment>();
+                investimentos.AddRange(await resultTds);
+                investimentos.AddRange(await resultLcis);
+                investimentos.AddRange(await resultFunds);
 
                 //Resultado consolidado
                 return _mapper.Map<ClientInvestments>(investimentos);

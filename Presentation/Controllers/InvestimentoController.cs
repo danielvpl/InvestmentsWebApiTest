@@ -2,7 +2,6 @@
 using Domain.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using Nancy;
 using System;
 using System.Threading.Tasks;
 

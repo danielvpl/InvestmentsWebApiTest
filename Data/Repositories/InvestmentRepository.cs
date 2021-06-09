@@ -25,12 +25,12 @@ namespace Data.Repositories
 
         public async Task<LciResponse> GetLcis()
         {
-            return await HttpRequestHelper<LciResponse>.GetResult(_configuration.GetSection("ApiUrlBase").Value, _configuration.GetSection("GetTdsEndpoint").Value);
+            return await HttpRequestHelper<LciResponse>.GetResult(_configuration.GetSection("ApiUrlBase").Value, _configuration.GetSection("GetLcisEndpoint").Value);
         }
 
         public async Task<FundsResponse> GetFunds()
         {
-            return await HttpRequestHelper<FundsResponse>.GetResult(_configuration.GetSection("ApiUrlBase").Value, _configuration.GetSection("GetTdsEndpoint").Value);
+            return await HttpRequestHelper<FundsResponse>.GetResult(_configuration.GetSection("ApiUrlBase").Value, _configuration.GetSection("GetFundsEndpoint").Value);
         }
     }
 }
