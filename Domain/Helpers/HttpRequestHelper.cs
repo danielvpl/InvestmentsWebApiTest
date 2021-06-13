@@ -10,22 +10,24 @@ namespace Domain.Helpers
         {
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            var client = new HttpClient(clientHandler);
-            client.BaseAddress = new Uri(apiUrlBase);
-            client.DefaultRequestHeaders.Accept.Clear();
-            HttpResponseMessage response = await client.GetAsync(getTdsEndpoint);
-            client.Dispose();
-            if (response.IsSuccessStatusCode)
+            
+            using (var client = new HttpClient(clientHandler))
             {
-                //GET
-                var result = await response.Content.ReadAsStringAsync();
+                client.BaseAddress = new Uri(apiUrlBase);
+                client.DefaultRequestHeaders.Accept.Clear();
+                HttpResponseMessage response = await client.GetAsync(getTdsEndpoint);
+                if (response.IsSuccessStatusCode)
+                {
+                    //GET
+                    var result = await response.Content.ReadAsStringAsync();
 
-                return JSONHelper.AsObjectList<T>(result);
+                    return JSONHelper.AsObjectList<T>(result);
+                }
+                else
+                {
+                    throw new NullReferenceException("Serviço Indisponível!");
+                }
             }
-            else
-            {
-                throw new NullReferenceException("Serviço Indisponível!");                
-            }           
         }
 
     }

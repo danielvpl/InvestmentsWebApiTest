@@ -33,6 +33,7 @@ namespace Presentation.Controllers
                       entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24 - DateTime.Now.Hour);
                       entry.SetPriority(CacheItemPriority.High);
                       var result = await _app.GetClientInvestments(dtConsult);
+
                       return Ok(result);                      
                   });
 
